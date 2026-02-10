@@ -6,12 +6,18 @@ use App\Models\Job;
 use App\Models\Info;
 
 Route::get('/', function () {
-    return view('home');
+    $employer = \App\Models\Employer::all();
+
+    return view('home', [
+        'employers' => $employer
+    ]);
 });
 
 Route::get('/job', function() {
+    $jobs = Job::with('employer')->get();
+
     return view('job', [
-        'jobs'=> Job::all()
+        'jobs'=> $jobs
     ]);
 });
 

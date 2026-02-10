@@ -3,6 +3,12 @@
 <x-slot:heading>
     Home page
 </x-slot:heading>
-    
+
     <h1>This is the home page</h1>
+
+    @foreach($employers as $e)
+        <h1>
+            <strong>{{$e['name']}}</strong>
+        </h1>
+    @endforeach
 </x-layout>
