@@ -26,4 +26,8 @@
         @endforeach
     </ul>
 
+    <div class="mt-10">
+        {{ $info->links() }}
+    </div>
+
 </x-layout>
