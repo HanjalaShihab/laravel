@@ -12,7 +12,7 @@ class Job extends Model
     protected $table = 'job_listings';
 
     protected $fillable = [
-        'title', 'company', 'location', 'description',
+        'title', 'company', 'location', 'description','employer_id',
     ];
 
     public function employer() {

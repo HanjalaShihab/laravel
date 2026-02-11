@@ -1,7 +1,16 @@
 <x-layout title="Info page">
+
+
     <x-slot:heading>
-        Info page
+        <div class="flex items-center justify-between w-full">
+            <span>Info page</span>
+
+            <x-create-link href="/info/create">
+                Add Info
+            </x-create-link>
+        </div>
     </x-slot:heading>
+
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         @foreach ($info as $i)

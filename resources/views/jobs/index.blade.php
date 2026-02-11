@@ -1,11 +1,18 @@
 <x-layout title="Job page">
+
     <x-slot:heading>
-        Job page
+        <div class="flex items-center justify-between w-full">
+            <span>Job Creation page</span>
+
+            <x-create-link href="/jobs/create">
+                Create Job
+            </x-create-link>
+        </div>
     </x-slot:heading>
 
     <div class="max-w-3xl mx-auto space-y-4">
         @foreach ($jobs as $job)
-            <a href="/job/{{ $job['id'] }}"
+            <a href="/jobs/{{ $job['id'] }}"
                class="block p-5 bg-white border border-gray-200 rounded-xl shadow-sm
                       hover:shadow-md hover:-translate-y-1 transition duration-200">
 

@@ -1,52 +1,119 @@
 <?php
 
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Arr;
 use App\Models\Job;
 use App\Models\Info;
+use App\Models\Employer;
 
 Route::get('/', function () {
-    $employer = \App\Models\Employer::all();
-
     return view('home', [
-        'employers' => $employer
-    ]);
-});
-
-Route::get('/job', function() {
-    $jobs = Job::with('employer')->get();
-
-    return view('job', [
-        'jobs'=> $jobs
+        'employers' => Employer::all()
     ]);
 });
 
 
-Route::get('/job/{id}', function($id){
-    $job = Job::find($id);
+// ---------------- JOB ROUTES ----------------
 
+Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->latest()->paginate(6);
 
-    return view('job-details', [
+    return view('jobs.index', [
+        'jobs' => $jobs
+    ]);
+});
+
+Route::get('/jobs/create', function() {
+
+    return view('jobs.create');
+});
+
+Route::get('/jobs/{job}', function (Job $job) {
+    return view('jobs.show', [
         'job' => $job
     ]);
 });
 
-Route::get('/info', function(){
-    return view('info', [
+Route::post('/jobs', function() {
 
-    'info' => Info::all()
+
+    Job::create([
+        'title' => request('title'),
+        'employer_id'=> 1,
+        'company' => request('company'),
+        'location' => request('location'),
+        'description' => request('description'),
+    ]);
+
+    return redirect('/jobs');
+});
+
+
+// ---------------- INFO ROUTES ----------------
+
+Route::get('/info', function () {
+    return view('info.index', [
+        'info' => Info::latest()->paginate(9)
     ]);
 });
 
 
-Route::get('/info/{id}', function($id){
-    $info = Info::find($id);
+Route::get('/info/create', function() {
+   return view('info.create');
+});
 
-    return view('detailed-info', [
-        'info'=> $info
+
+Route::get('/info/{id}', function ($id) {
+    return view('info.show', [
+        'info' => Info::find($id)
     ]);
 });
 
+
+Route::post('/info', function() {
+    Info::create([
+        'name'=> request('name'),
+        'address'=> request('address'),
+        'phone'=> request('phone'),
+    ]);
+
+    return redirect('/info');
+});
+
+//------------------BLOG--------------------
+Route::get('/blog', function() {
+    $blog = Blog::latest()->paginate(2);
+
+    return view('blog.index', [
+        'blog' => $blog
+    ]);
+});
+
+Route::get('/blog/create', function() {
+    return view('blog.create');
+});
+
+Route::get('/blog/{id}', function($id) {
+    $blog = Blog::find($id);
+
+    return view('blog.show', [
+        'blog' => $blog
+    ]);
+});
+
+Route::post('/blog', function() {
+
+
+    Blog::create([
+        'title' => request('title'),
+        'content' => request('content'),
+        'author' => request('author'),
+    ]);
+
+    return redirect('/blog');
+});
+
+// ---------------- CONTACT ----------------
 
 Route::get('/contact', function () {
     return view('contact');

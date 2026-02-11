@@ -1,33 +1,68 @@
-<x-layout title="Info page">
+<x-layout title="Create page">
     <x-slot:heading>
-        Info page
+        Create page
     </x-slot:heading>
 
-    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
-        @foreach ($info as $i)
-            <li class="bg-neutral-primary-soft w-full p-6 border border-default rounded-base shadow-xs hover:bg-sky-500/50 rounded">
-                <h5 class="mb-3 text-xl sm:text-2xl font-semibold tracking-tight text-heading leading-7 sm:leading-8">
-                    {{$i['name']}}
-                </h5>
+    <form action="/info" method="POST" class="max-w-xl mx-auto bg-white shadow-md rounded-xl p-8 space-y-6">
+        @csrf
 
-                <p class="text-body mb-3 break-words">
-                    {{$i['address']}}
-                </p>
+        <!-- Name -->
+        <div>
+            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                Name
+            </label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                   focus:border-sky-500 focus:ring-2 focus:ring-sky-200
+                   outline-none transition"
+                placeholder="Enter name">
+        </div>
 
-                <p class="text-body mb-5">
-                    {{$i['phone']}}
-                </p>
+        <!-- Address -->
+        <div>
+            <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">
+                Address
+            </label>
+            <textarea
+                name="address"
+                id="address"
+                rows="3"
+                required
+                class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                   focus:border-sky-500 focus:ring-2 focus:ring-sky-200
+                   outline-none transition"
+                placeholder="Enter address"></textarea>
+        </div>
 
-                <a href="/info/{{ $i['id'] }}"
-                    class="inline-flex items-center justify-center w-full sm:w-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5">
-                    Read more >
-                </a>
-            </li>
-        @endforeach
-    </ul>
+        <!-- Phone -->
+        <div>
+            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                Phone
+            </label>
+            <input
+                type="tel"
+                name="phone"
+                id="phone"
+                required
+                class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                   focus:border-sky-500 focus:ring-2 focus:ring-sky-200
+                   outline-none transition"
+                placeholder="Enter phone number">
+        </div>
 
-    <div class="mt-10">
-        {{ $info->links() }}
-    </div>
-
+        <!-- Submit -->
+        <div class="pt-4">
+            <button
+                type="submit"
+                class="w-full bg-sky-600 hover:bg-sky-700 text-white
+                   font-semibold py-3 rounded-lg
+                   transition shadow-sm">
+                Save Info
+            </button>
+        </div>
+    </form>
 </x-layout>
