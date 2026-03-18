@@ -16,7 +16,7 @@
                        name="title"
                        value="{{ old('title') }}"
                        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                       placeholder="Enter blog title">
+                       placeholder="Enter blog title" required>
 
                 @error('title')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -32,7 +32,7 @@
                        name="author"
                        value="{{ old('author') }}"
                        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                       placeholder="Author name">
+                       placeholder="Author name" required>
 
                 @error('author')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -47,7 +47,7 @@
                 <textarea name="content"
                           rows="6"
                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                          placeholder="Write your blog content...">{{ old('content') }}</textarea>
+                          placeholder="Write your blog content..." required>{{ old('content') }}</textarea>
 
                 @error('content')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

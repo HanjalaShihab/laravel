@@ -28,14 +28,20 @@ Route::get('/jobs/create', function() {
     return view('jobs.create');
 });
 
-Route::get('/jobs/{job}', function (Job $job) {
+Route::get('/jobs/{id}', function ($id) {
+    $job = Job::find($id);
     return view('jobs.show', [
         'job' => $job
     ]);
 });
 
 Route::post('/jobs', function() {
-
+    request()->validate([
+        'title' => ['required'],
+        'company' => 'required',
+        'location' => 'required',
+        'description' => 'required',
+    ]);
 
     Job::create([
         'title' => request('title'),
@@ -48,6 +54,13 @@ Route::post('/jobs', function() {
     return redirect('/jobs');
 });
 
+Route::get('/jobs/{id}/edit', function($id){
+    $job = Job::find($id);
+
+    return view('jobs.edit', [
+        'job' => $job
+    ]);
+});
 
 // ---------------- INFO ROUTES ----------------
 
@@ -71,6 +84,13 @@ Route::get('/info/{id}', function ($id) {
 
 
 Route::post('/info', function() {
+    request()->validate([
+        'name' => 'required',
+        'address' => 'required',
+        'phone' => 'required',
+    ]);
+
+
     Info::create([
         'name'=> request('name'),
         'address'=> request('address'),
@@ -102,7 +122,11 @@ Route::get('/blog/{id}', function($id) {
 });
 
 Route::post('/blog', function() {
-
+    request()->validate([
+        'title' => 'required',
+        'content' => 'required',
+        'author' => 'required',
+    ]);
 
     Blog::create([
         'title' => request('title'),

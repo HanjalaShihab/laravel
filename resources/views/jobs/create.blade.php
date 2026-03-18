@@ -13,10 +13,14 @@
             <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Job Title
             </label>
-            <input type="text" name="title" required
+            <input type="text" name="title"
                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5
                       focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
-                   placeholder="e.g. Senior Laravel Developer">
+                   placeholder="e.g. Senior Laravel Developer" required>
+
+                 @error('title')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p> 
+                 @enderror  
         </div>
 
         <!-- Company -->
@@ -24,10 +28,14 @@
             <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Company
             </label>
-            <input type="text" name="company" required
+            <input type="text" name="company"
                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5
                       focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
-                   placeholder="Company name">
+                   placeholder="Company name" required>
+
+                    @error('company')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
         </div>
 
         <!-- Location -->
@@ -35,10 +43,15 @@
             <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Location
             </label>
-            <input type="text" name="location" required
+            <input type="text" name="location"
                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5
                       focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
-                   placeholder="City / Remote">
+                   placeholder="City / Remote" required>
+
+
+                    @error('location')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
         </div>
 
         <!-- Description -->
@@ -46,10 +59,15 @@
             <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Description
             </label>
-            <textarea name="description" rows="5" required
+            <textarea name="description" rows="5"
                       class="w-full rounded-lg border border-gray-300 px-4 py-2.5
                          focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none"
-                      placeholder="Job responsibilities and requirements"></textarea>
+                      placeholder="Job responsibilities and requirements" required></textarea>
+
+
+                    @error('description')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
         </div>
 
         <!-- Submit -->
